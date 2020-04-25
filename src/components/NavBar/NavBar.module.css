@@ -1,0 +1,22 @@
+.navBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  overflow: hidden;
+  width: 95%;
+  height: 8%;
+  margin: 0 auto;
+  padding: 8px;
+  overflow: hidden;
+  background: rgb(67, 128, 179);
+  color: rgb(239, 241, 243);
+  font-size: 1.5rem;
+  border-radius: 0 0 10px 10px ;
+}
+
+
+.navBar > div.navButton > svg {
+  height: 40px;
+  width: 40px;
+}
