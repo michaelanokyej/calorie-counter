@@ -12,10 +12,16 @@ const Navbar = ({ handleTrashButton }) => {
   return (
     <div className={styles.navBar}>
       <div className={styles.navButton}>
+        <a href="https://michaelanokye.com/" target="_blank">
         <FontAwesomeIcon icon={faCode} />
+        </a>
+        
       </div>
       <div className={styles.navButton}>
+        <a href="/">
         <FontAwesomeIcon icon={faHome} />
+        </a>
+        
       </div>
       <div className={styles.navButton} onClick={(e) => {
         e.preventDefault();

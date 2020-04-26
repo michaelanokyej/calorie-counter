@@ -9,18 +9,25 @@ import { tokenService } from "./services/TokenService";
 
 class App extends Component {
   state = {
-    token: "",
+    token: tokenService.token,
     firstName: tokenService.user.firstName,
-    lastName: "",
-    height: 0,
-    weight: 0,
-    BMI: 0,
-    calorieGoal: 0,
-    calorieStatus: 0,
+    lastName: tokenService.user.lastName,
+    height: Number(tokenService.user.height),
+    weight: Number(tokenService.user.weight),
+    BMI: Number(tokenService.user.BMI),
+    calorieGoal: Number(tokenService.calorieGoal),
+    calorieStatus: Number(tokenService.calorieStatus),
   };
+
+  componentDidMount = () =>{
+    const token = tokenService.find();
+    this.setState({token})
+  }
 
   handleUserRegistration = (userInfo) => {
     tokenService.storeUser(userInfo);
+    tokenService.storeCalorieGoal(userInfo.calorieGoal)
+    tokenService.create(userInfo.id)
     this.setState({
       token: userInfo.id,
       firstName: userInfo.firstName,
@@ -28,13 +35,14 @@ class App extends Component {
       height: userInfo.height,
       weight: userInfo.weight,
       BMI: userInfo.BMI,
+      calorieGoal: userInfo.calorieGoal
     });
   };
 
   handleTrashButton = () => {
     tokenService.remove();
     this.setState({
-      token: "",
+      token: null,
       firstName: "",
       lastName: "",
       height: 0,
@@ -45,19 +53,20 @@ class App extends Component {
     });
   };
 
+  handleCalorieStatus = (status) => {
+    this.setState({calorieStatus: status});
+    tokenService.storeCalorieStatus(status);
+  }
+
   render() {
-    console.log("state in app: ", this.state);
-    console.log("userInfo in token: ", tokenService.user);
     return (
       <div className={styles.container}>
         <div className={styles.mainApp}>
-          {tokenService.user.firstName ? 
-            <Chart />
+          {tokenService.token ? 
+            <Chart handleCalorieStatus={this.handleCalorieStatus} />
            : 
             <LandingPage handleUserRegistration={this.handleUserRegistration} />
           }
-          {/* <LandingPage handleUserRegistration={ this.handleUserRegistration }/> */}
-          {/* <Chart /> */}
         </div>
         <NavBar handleTrashButton={this.handleTrashButton} />
       </div>

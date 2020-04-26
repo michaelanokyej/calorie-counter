@@ -10,10 +10,12 @@ class LandingPage extends Component {
     heightInFt: 0,
     heightInInc: 0,
     weight: 0,
+    calorieGoal: 0,
   };
   render() {
     return (
       <div className={styles.container}>
+        <h1>Calorie Counter</h1>
         <blockquote>
           <p>
             Welcome to Calorie Counter. Calories are very important when trying
@@ -68,12 +70,21 @@ class LandingPage extends Component {
               />
               <span className={styles.inputSpan}>lbs</span>
             </div>
+            <div className={styles.inputDiv}>
+              <input
+                type="number"
+                placeholder="2000"
+                maxLength="8"
+                className={styles.calorie}
+                onChange={(e) => this.setState({ calorieGoal: e.target.value })}
+              />
+              <span className={styles.inputSpan}>Calorie Goal</span>
+            </div>
             <button
               type="submit"
               className={styles.registerButton}
               onClick={(e) => {
                 e.preventDefault();
-                console.log("state in landing: ", this.state);
                 const feetToInches = this.state.heightInFt * 12;
                 const userHeight =
                   feetToInches + Number(this.state.heightInInc);
@@ -88,8 +99,30 @@ class LandingPage extends Component {
                   height: userHeight,
                   weight: Number(this.state.weight),
                   BMI: Number(BMI.toFixed(2)),
+                  calorieGoal: Number(this.state.calorieGoal),
                 };
-                this.props.handleUserRegistration(userInfo);
+                if (this.state.firstName.length < 1) {
+                  alert(`First name cannot be empty`);
+                } else if (this.state.lastName.length < 1) {
+                  alert(`Last name cannot be empty`);
+                } else if (
+                  this.state.heightInFt === 0 ||
+                  this.state.heightInFt == null
+                ) {
+                  alert(`Height cannot be empty`);
+                } else if (
+                  this.state.weight === 0 ||
+                  this.state.weight == null
+                ) {
+                  alert(`Weight cannot be empty`);
+                } else if (
+                  this.state.calorieGoal === 0 ||
+                  this.state.calorieGoal == null
+                ) {
+                  alert(`Calorie goal cannot be empty`);
+                } else {
+                  this.props.handleUserRegistration(userInfo);
+                }
               }}
             >
               Register!
