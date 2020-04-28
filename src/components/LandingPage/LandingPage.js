@@ -27,18 +27,18 @@ class LandingPage extends Component {
           </p>
           <p>Register to track your calorie intake and more!</p>
         </blockquote>
-        <div>
+        <div className={styles.formDiv}>
           <form>
             <div className={cx(styles.inputDiv)}>
               <input
                 type="text"
-                placeholder="firstName"
+                placeholder="First Name"
                 className={styles.nameInput}
                 onChange={(e) => this.setState({ firstName: e.target.value })}
               />
               <input
                 type="text"
-                placeholder="lastName"
+                placeholder="Last Name"
                 className={styles.nameInput}
                 onChange={(e) => this.setState({ lastName: e.target.value })}
               />

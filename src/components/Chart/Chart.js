@@ -32,7 +32,7 @@ class Chart extends Component {
     const barChart =
       tokenService.calorieStatus !== 0 ? (
         <Bar
-        height="350px"
+        height={350}
           data={{
             labels: ["Calories"],
             datasets: [

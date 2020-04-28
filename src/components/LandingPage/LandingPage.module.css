@@ -24,10 +24,13 @@ blockquote > p {
   padding: 4px;
 }
 
+.formDiv{
+  margin-top: 50px;
+}
+
 form {
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
 }
 
 form > .inputDiv {
@@ -74,3 +77,12 @@ form > .inputDiv > input.hw {
   margin-top: 20px;
 }
 
+@media (max-width: 500px) {
+  .formDiv{
+    margin-top: 10px;
+  }
+
+  .registerButton {
+    margin-top: 10px;
+  }
+}
